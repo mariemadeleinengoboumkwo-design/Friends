@@ -113,20 +113,6 @@ function publier(){
  document.getElementById('fil').prepend(post);
  champ.value='';
 }
-</script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-
-import {
- getAuth,
- createUserWithEmailAndPassword,
- signInWithEmailAndPassword,
- signOut,
- updateProfile,
- sendEmailVerification,
- onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
 const firebaseConfig = {
  apiKey: "AIzaSyCPfzgAzFYetZdAImaCsyX6WOesScXE_yQ",
