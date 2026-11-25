@@ -6,89 +6,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090711">
 <title>FRIENDS - Réseau social</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090711;color:white;font-family:Arial,sans-serif}
-header{background:#171225;padding:18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #392653}
-.logo{font-size:27px;font-weight:bold;color:#b78aff}
-header span{color:white}
+body{margin:0;background:#090711;color:white;font-family:Arial}
+header{background:#171225;padding:18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #49335f}
+.logo{font-size:27px;font-weight:bold;color:#bd91ff}
 main{max-width:650px;margin:auto;padding:18px}
 h2{color:#c49aff}
-.card{background:#191426;border:1px solid #38264d;border-radius:15px;padding:16px;margin:15px 0}
+.card{background:#191426;border:1px solid #49335f;border-radius:15px;padding:16px;margin:15px 0}
 input,textarea{width:100%;padding:13px;border:1px solid #543d70;border-radius:10px;background:#100d19;color:white;margin:7px 0}
-button{background:#853bea;color:white;border:0;border-radius:9px;padding:12px;cursor:pointer}
-button:hover{background:#a56af0}
-nav{position:fixed;bottom:0;left:0;right:0;background:#171225;display:flex;justify-content:space-around;padding:12px 2px;border-top:1px solid #49335f}
-nav button{background:transparent;padding:8px 5px;font-size:12px}
-nav button.active{color:#c49aff}
-.page{display:none;padding-bottom:80px}
+button{background:#853bea;color:white;border:0;border-radius:9px;padding:12px;margin:4px;cursor:pointer}
+nav{position:fixed;bottom:0;left:0;right:0;background:#171225;display:flex;justify-content:space-around;padding:10px 2px;border-top:1px solid #49335f}
+nav button{background:transparent;font-size:12px;padding:8px 4px}
+.page{display:none;padding-bottom:85px}
 .page.active{display:block}
-.post{white-space:pre-wrap;overflow-wrap:anywhere}
 .small{color:#aaa;font-size:13px}
+.post{white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 </head>
+
 <body>
+
 <header>
-<div class="logo">FRIENDS<span>.</span></div>
+<div class="logo">FRIENDS.</div>
 <div>🌐 Connecte le monde</div>
 </header>
 
 <main>
+
 <section id="accueil" class="page active">
 <h2>Bienvenue sur FRIENDS 💜</h2>
 <div class="card">
 <h3>Quoi de neuf ?</h3>
-<textarea id="publication" placeholder="Partage quelque chose avec tes amis..."></textarea>
+<textarea id="publication" placeholder="Partage quelque chose..."></textarea>
 <button onclick="publier()">Publier</button>
 </div>
 <h2>Fil d'actualité</h2>
-<div id="fil">
-<div class="card">
-<b>FRIENDS OFFICIEL</b>
-<p>Bienvenue dans ton nouveau réseau social ! 🎉</p>
-<p class="small">Publication officielle</p>
-</div>
-</div>
+<div id="fil"></div>
 </section>
 
 <section id="videos" class="page">
 <h2>🎬 Vidéos</h2>
 <div class="card">
-<p>Découvre et partage des vidéos avec tes amis.</p>
+<p>Partage tes vidéos avec tes amis.</p>
 <input type="file" accept="video/*">
-<p class="small">La publication des vidéos en ligne sera activée avec notre serveur.</p>
+<p class="small">Le partage en ligne sera ajouté prochainement.</p>
 </div>
 </section>
 
 <section id="messages" class="page">
 <h2>💬 Messages</h2>
 <div class="card">
-<p>Discute avec tes amis sur FRIENDS.</p>
-<p class="small">La messagerie en temps réel sera connectée à notre serveur.</p>
+<p>Bienvenue dans la messagerie FRIENDS.</p>
+<p class="small">La messagerie en temps réel sera ajoutée prochainement.</p>
 </div>
 </section>
 
 <section id="appels" class="page">
 <h2>📞 Appels</h2>
 <div class="card">
-<p>Appels audio et vidéo entre amis.</p>
-<p class="small">Service d'appels à connecter.</p>
+<p>Appels audio et vidéo.</p>
+<p class="small">Le service d'appels sera ajouté prochainement.</p>
 </div>
 </section>
 
 <section id="profil" class="page">
-<h2>👤 Mon profil</h2>
+<h2>👤 Mon compte FRIENDS</h2>
 <div class="card">
-<h3>Bienvenue sur FRIENDS</h3>
-<input placeholder="Ton nom">
-<input placeholder="Ton pseudo">
-<button onclick="alert('Le profil sera enregistré après connexion du serveur.')">Enregistrer</button>
+<h3>Créer un compte</h3>
+<input id="nom" placeholder="Ton nom">
+<input id="pseudo" placeholder="Ton pseudo">
+<input id="email" type="email" placeholder="Adresse e-mail">
+<input id="password" type="password" placeholder="Mot de passe (6 caractères minimum)">
+<button id="inscription">Créer mon compte</button>
+<button id="connexion">Se connecter</button>
+<button id="deconnexion">Se déconnecter</button>
+<p id="etatCompte" class="small">Tu n'es pas connecté.</p>
 </div>
 </section>
+
 </main>
 
 <nav>
-<button class="active" onclick="ouvrir('accueil',this)">🏠<br>Accueil</button>
+<button onclick="ouvrir('accueil',this)" class="active">🏠<br>Accueil</button>
 <button onclick="ouvrir('videos',this)">🎬<br>Vidéos</button>
 <button onclick="ouvrir('messages',this)">💬<br>Messages</button>
 <button onclick="ouvrir('appels',this)">📞<br>Appels</button>
@@ -97,20 +98,105 @@ nav button.active{color:#c49aff}
 
 <script>
 function ouvrir(id,btn){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
 }
+
 function publier(){
-let champ=document.getElementById('publication');
-if(!champ.value.trim())return alert('Écris une publication.');
-let post=document.createElement('div');
-post.className='card post';
-post.textContent=champ.value;
-document.getElementById('fil').prepend(post);
-champ.value='';
+ const champ=document.getElementById('publication');
+ if(!champ.value.trim())return alert('Écris une publication.');
+ const post=document.createElement('div');
+ post.className='card post';
+ post.textContent=champ.value;
+ document.getElementById('fil').prepend(post);
+ champ.value='';
 }
 </script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+import {
+ getAuth,
+ createUserWithEmailAndPassword,
+ signInWithEmailAndPassword,
+ signOut,
+ updateProfile,
+ sendEmailVerification,
+ onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyCPfzgAzFYetZdAImaCsyX6WOesScXE_yQ",
+ authDomain: "friends-e15e5.firebaseapp.com",
+ projectId: "friends-e15e5",
+ storageBucket: "friends-e15e5.firebasestorage.app",
+ messagingSenderId: "765510563249",
+ appId: "1:765510563249:web:d22a661f145dcae65f7990",
+ measurementId: "G-P651T62BS7"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const etat = document.getElementById("etatCompte");
+
+document.getElementById("inscription").onclick = async () => {
+ const nom = document.getElementById("nom").value.trim();
+ const pseudo = document.getElementById("pseudo").value.trim();
+ const email = document.getElementById("email").value.trim();
+ const password = document.getElementById("password").value;
+
+ if(!nom || !pseudo || !email || !password){
+  etat.textContent="Remplis tous les champs.";
+  return;
+ }
+
+ if(password.length < 6){
+  etat.textContent="Le mot de passe doit contenir au moins 6 caractères.";
+  return;
+ }
+
+ try {
+  const result = await createUserWithEmailAndPassword(auth,email,password);
+  await updateProfile(result.user,{displayName:pseudo});
+  await sendEmailVerification(result.user);
+  etat.textContent="Compte créé ! Vérifie ton adresse e-mail.";
+ } catch(error) {
+  etat.textContent="Erreur : "+error.message;
+ }
+};
+
+document.getElementById("connexion").onclick = async () => {
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+
+ try {
+  await signInWithEmailAndPassword(auth,email,password);
+  etat.textContent="Connexion réussie ! Bienvenue sur FRIENDS.";
+ } catch(error) {
+  etat.textContent="Erreur : "+error.message;
+ }
+};
+
+document.getElementById("deconnexion").onclick = async () => {
+ try {
+  await signOut(auth);
+  etat.textContent="Tu es déconnecté.";
+ } catch(error) {
+  etat.textContent="Erreur : "+error.message;
+ }
+};
+
+onAuthStateChanged(auth,user=>{
+ if(user){
+  etat.textContent="Connecté : "+(user.displayName || user.email);
+ } else {
+  etat.textContent="Tu n'es pas connecté.";
+ }
+});
+</script>
+
 </body>
 </html>
